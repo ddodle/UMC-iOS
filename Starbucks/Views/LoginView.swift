@@ -50,7 +50,7 @@ struct LoginView: View {
         .frame(maxHeight: 20)
 
       Text("회원 서비스 이용을 위해 로그인 해주세요.")
-        .font(.pretendard(.medium, size: 12))
+        .font(.pretendard(.medium, size: 16))
         .foregroundStyle(.gray00)
     }
   }
