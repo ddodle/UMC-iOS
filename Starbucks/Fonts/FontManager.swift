@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Font {
-    enum Pretendard {
+    public enum Pretendard {
         case semibold
         case medium
         case regular

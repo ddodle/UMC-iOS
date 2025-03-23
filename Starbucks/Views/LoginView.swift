@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-  @State private var username = ""
-  @State private var password = ""
+    @StateObject private var LoginViewModle = LoginViewModel()
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -34,35 +33,34 @@ struct LoginView: View {
 
   var titleHeader: some View {
     VStack(alignment: .leading, spacing: 0) {
-      Image("starbucks")
+      Image("StarbucksLogo")
         .resizable()
         .scaledToFit()
         .frame(width: 95)
         .fixedSize()
 
       Spacer()
-        .frame(maxHeight: 28)
+        .frame(maxHeight: 40)
 
       Text("안녕하세요.\n스타벅스입니다.")
-        .font(.title2)
-        .fontWeight(.bold)
+        .font(.pretendard(.bold, size: 28))
         .fixedSize()
 
       Spacer()
-        .frame(maxHeight: 19)
+        .frame(maxHeight: 20)
 
       Text("회원 서비스 이용을 위해 로그인 해주세요.")
-        .font(.caption)
-        .foregroundStyle(.secondary)
+        .font(.pretendard(.medium, size: 12))
+        .foregroundStyle(.gray00)
     }
   }
 
   var loginField: some View {
     VStack(spacing: 47) {
-      TextField("아이디", text: $username)
+        TextField("아이디", text: $LoginViewModle.user.id)
         .textFieldStyle(BottomLineTextFieldStyle())
 
-      SecureField("비밀번호", text: $password)
+        SecureField("비밀번호", text: $LoginViewModle.user.password)
         .textFieldStyle(BottomLineTextFieldStyle())
 
 
@@ -74,7 +72,7 @@ struct LoginView: View {
         .frame(height: 48)
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.capsule)
-        .tint(.green)
+        .tint(.green00)
 
         Button("회원가입") {}
           .tint(.secondary)
@@ -85,14 +83,14 @@ struct LoginView: View {
 
   var thirdPartyLoginField: some View {
     VStack(spacing: 8) {
-      Button(action: {}, label: {
-        ZStack(alignment: .leading) {
-          Image(systemName: "message.fill")
-
-          Text("카카오로 계속")
+        Button(action: {}, label: {
+          Text("카카오로 로그인")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-      })
+            .overlay(alignment: .leading) {
+              Image("KakaoLogo")
+                .padding(.leading, 4)
+            }
+        })
       .frame(height: 48)
       .buttonStyle(.borderedProminent)
       .buttonBorderShape(.capsule)
@@ -100,10 +98,10 @@ struct LoginView: View {
       .foregroundStyle(.black)
 
       Button(action: {}, label: {
-        Text("Apple로 계속")
+        Text("Apple로 로그인")
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .overlay(alignment: .leading) {
-            Image(systemName: "apple.logo")
+            Image("AppleLogo")
               .padding(.leading, 4)
           }
       })
