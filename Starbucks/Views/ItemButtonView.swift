@@ -17,9 +17,9 @@ struct ItemButtonView: View {
             HStack {
                 Image(imageName)
                     .resizable()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 32, height: 32)
                 Text(title)
-                    .font(.subheadline)
+                    .font(.callout)
                     .foregroundStyle(.black)
                 Spacer()
             }
