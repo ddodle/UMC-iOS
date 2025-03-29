@@ -48,7 +48,7 @@ struct MainTabView: View {
                 }
                 .tag(3)
             
-            Color.white
+            OtherView()
                 .tabItem {
                     VStack{
                         Image(selectedTab == 4 ? "otherSelected":"other")
