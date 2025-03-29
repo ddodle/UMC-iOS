@@ -65,14 +65,14 @@ struct OtherView: View {
     }
     
     var Pay: some View{
-        VStack(alignment: .leading, spacing: 12){
+        VStack(alignment: .leading, spacing: 24){
             Text("Pay")
                 .font(.title3)
                 .fontWeight(.bold)
             LazyVGrid(columns:
                 [GridItem(.flexible())
                ,GridItem(.flexible())
-                ], spacing: 16) {
+                ], spacing: 24) {
                 ItemButtonView(title: "스타벅스 카드 등록", imageName: "card", action: {print("card")})
                 ItemButtonView(title: "카드 교환권 등록", imageName: "card_change", action: {print("card_change")})
                 ItemButtonView(title: "쿠폰 등록", imageName: "coupon", action: {print("coupon")})
@@ -83,14 +83,14 @@ struct OtherView: View {
     
     
     var Service: some View{
-        VStack(alignment: .leading, spacing: 12){
+        VStack(alignment: .leading, spacing: 24){
             Text("고객 지원")
                 .font(.title3)
                 .fontWeight(.bold)
             LazyVGrid(columns:
                 [GridItem(.flexible())
                  ,GridItem(.flexible())
-                ], spacing: 16) {
+                ], spacing: 24) {
                 ItemButtonView(title: "스토어 케어", imageName: "store_care", action: {print("store_care")})
                 ItemButtonView(title: "고객의 소리", imageName: "customer", action: {print("customer")})
                 ItemButtonView(title: "매장 정보", imageName: "store_info", action: {print("store_info")})
