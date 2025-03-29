@@ -39,6 +39,7 @@ struct AdView: View{
                 Spacer()
 
                 Button(action: {
+                    print("dismiss")
                     dismiss()
                 }, label: {
                     Text("X 닫기")
