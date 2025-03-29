@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var LoginViewModle = LoginViewModel()
-
+  @StateObject private var LoginViewModle = LoginViewModel()
+    
   var body: some View {
     VStack(alignment: .leading) {
       Spacer()
@@ -55,15 +55,31 @@ struct LoginView: View {
     }
   }
 
+    @FocusState private var focusedField: Field?
+    
+    enum Field{
+        case id
+        case password
+    }
+
   var loginField: some View {
     VStack(spacing: 47) {
-        TextField("아이디", text: $LoginViewModle.user.id)
-        .textFieldStyle(BottomLineTextFieldStyle())
-
-        SecureField("비밀번호", text: $LoginViewModle.user.password)
-        .textFieldStyle(BottomLineTextFieldStyle())
-
-
+        VStack{
+            TextField("아이디", text: $LoginViewModle.user.id)
+                .focused($focusedField, equals: .id)
+            Divider()
+                .frame(height: 1)
+                .background(focusedField == .id ? Color.green00: Color.gray00)
+        }
+        
+        VStack{
+            SecureField("비밀번호", text: $LoginViewModle.user.password)
+                .focused($focusedField, equals: .password)
+            Divider()
+                .frame(height: 1)
+                .background(focusedField == .password ? Color.green00: Color.gray00)
+        }
+        
       VStack {
         Button(action: {}, label: {
           Text("로그인하기")

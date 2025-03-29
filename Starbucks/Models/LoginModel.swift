@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct User {
-    var id: String = ""
-    var password: String = ""
+class User: ObservableObject{
+    @Published var id: String = ""
+    @Published var password: String = ""
 }
+
