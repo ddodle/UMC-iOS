@@ -19,7 +19,7 @@ struct IconButton: View {
                     .resizable()
                     .frame(width: 60, height: 60)
                 Text(title)
-                    .foregroundColor(.black02)
+                    .foregroundStyle(.black02)
             }
             .padding()
         }

@@ -49,9 +49,9 @@ struct OtherView: View {
         VStack{
             (
                 Text("\(otherViewModel.nickname)")
-                    .foregroundColor(.green01)
+                    .foregroundStyle(.green01)
                 + Text("님 \n환영합니다!🙌🏻")
-                    .foregroundColor(.black01)
+                    .foregroundStyle(.black01)
             )
             .font(.title)
             .multilineTextAlignment(.center)

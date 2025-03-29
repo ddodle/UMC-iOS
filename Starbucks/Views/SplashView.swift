@@ -10,14 +10,10 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         ZStack {
-            Rectangle()
-              .foregroundColor(.clear)
+            Image("StarbucksLogo")
+              .resizable()
               .frame(width: 120, height: 120)
-              .background(
-                Image("StarbucksLogo")
-                  .resizable()
-                  .aspectRatio(contentMode: .fit)
-              )
+              .aspectRatio(contentMode: .fit)
         }
         .frame(width: 440, height: 956)
         .background(.green01)

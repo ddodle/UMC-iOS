@@ -43,7 +43,7 @@ struct AdView: View{
                     dismiss()
                 }, label: {
                     Text("X 닫기")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.gray)
                         .font(.body)
                 })
             }
