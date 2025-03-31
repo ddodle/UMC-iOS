@@ -43,14 +43,15 @@ struct LoginView: View {
         .frame(maxHeight: 40)
 
       Text("안녕하세요.\n스타벅스입니다.")
-        .font(.pretendard(.bold, size: 28))
+        .font(.title)
+        .fontWeight(.bold)
         .fixedSize()
 
       Spacer()
         .frame(maxHeight: 20)
 
       Text("회원 서비스 이용을 위해 로그인 해주세요.")
-        .font(.pretendard(.medium, size: 16))
+        .font(.body)
         .foregroundStyle(.gray00)
     }
   }
