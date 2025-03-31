@@ -59,7 +59,7 @@ struct OtherView: View {
             HStack{
                 IconButton(title: "별 히스토리", imageName: "star_history", action: {print("star_history")})
                 IconButton(title: "전자영수증", imageName: "receipt", action: {print("receipt")})
-                IconButton(title: "나만의 메뉴", imageName: "myReceipt", action: {print("myReceipt")})
+                IconButton(title: "나만의 메뉴", imageName: "myRecipe", action: {print("myRecipe")})
             }
         }
     }
