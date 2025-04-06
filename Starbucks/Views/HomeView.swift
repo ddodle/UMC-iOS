@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView : View {
     @State private var progress: Float = 1 / 12.0
     @StateObject var menuViewModel = MenuViewModel()
+    @StateObject var whatsNewViewModel = WhatsNewViewModel()
     
     var body: some View {
         ScrollView{
@@ -61,7 +62,21 @@ struct HomeView : View {
                 .resizable()
                 .padding(.horizontal, 20)
             
-            
+            VStack (alignment: .leading){
+                Text("What's new")
+                    .font(.title2)
+                    .padding()
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(whatsNewViewModel.WhatsNews){ WhatsNew in
+                            WhatsNewCard(whatsNew: WhatsNew)
+                        }
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .padding(.horizontal)
         }
         .padding()
     }
