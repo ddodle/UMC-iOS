@@ -11,6 +11,7 @@ struct HomeView : View {
     @State private var progress: Float = 1 / 12.0
     @StateObject var menuViewModel = MenuViewModel()
     @StateObject var whatsNewViewModel = WhatsNewViewModel()
+    @StateObject var breadViewModel = BreadViewModel()
     
     var body: some View {
         ScrollView{
@@ -42,7 +43,6 @@ struct HomeView : View {
                 }
                 .padding()
 
-                
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(menuViewModel.menuItems) { menuItem in
@@ -77,6 +77,35 @@ struct HomeView : View {
                 .padding(.horizontal)
             }
             .padding(.horizontal)
+            
+            VStack{
+                Image("1mug")
+                Image("2onlinestore")
+                Image("3delivery")
+            }
+            
+            VStack (alignment: .leading){
+                Text("하루가 달콤해지는 디저트")
+                    .font(.title2)
+                    .padding()
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(breadViewModel.menuItems) { menuItem in
+                            CircleImageCard(menuItem: menuItem)
+                        }
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .padding(.horizontal)
+            
+            VStack{
+                Image("4coldbrew")
+                Image("5drink")
+                Image("6sizeup")
+            }
+            
         }
         .padding()
     }
