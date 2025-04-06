@@ -14,16 +14,18 @@ struct HomeView : View {
     @StateObject var breadViewModel = BreadViewModel()
     
     var body: some View {
-        ScrollView{
-            VStack{
-                topBanner
-                    .padding(.horizontal)
-                mainBanner
+        NavigationStack{
+            ScrollView{
+                VStack{
+                    topBanner
+                        .padding(.horizontal)
+                    mainBanner
+                    
+                }
                 
             }
-            
+            .ignoresSafeArea(.all)
         }
-        .ignoresSafeArea(.all)
     }
     
     var mainBanner: some View{
