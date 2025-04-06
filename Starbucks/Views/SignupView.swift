@@ -16,6 +16,8 @@ struct SignupView: View{
 
     @FocusState private var focusedField: Field?
     
+    @Environment(\.dismiss) private var dismiss
+    
     enum Field{
         case nickname
         case email
@@ -28,6 +30,7 @@ struct SignupView: View{
                 .frame(maxHeight : 212)
             SignupField
         }
+        .navigationTitle("회원가입")
         .padding()
     }
     
@@ -64,9 +67,19 @@ struct SignupView: View{
                 .frame(maxHeight : 428)
             
             Button(action: {
-                storedNickname = signupViewModel.signup.nickname
-                storedEmail = signupViewModel.signup.email
-                storedPassword = signupViewModel.signup.password
+                if  signupViewModel.signup.nickname.count > 0 &&
+                    signupViewModel.signup.email.count > 0 &&
+                    signupViewModel.signup.password.count > 0 {
+                    
+                    
+                    storedNickname = signupViewModel.signup.nickname
+                    storedEmail = signupViewModel.signup.email
+                    storedPassword = signupViewModel.signup.password
+                    
+                    dismiss()
+                }else{
+                    
+                }
             }, label: {
               Text("회원가입하기")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
