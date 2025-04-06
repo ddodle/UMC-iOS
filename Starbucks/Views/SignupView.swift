@@ -31,6 +31,8 @@ struct SignupView: View{
             SignupField
         }
         .navigationTitle("회원가입")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backbutton)
         .padding()
     }
     
@@ -88,6 +90,16 @@ struct SignupView: View{
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .tint(.green00)
+        }
+    }
+    
+    var backbutton: some View{
+        Button{
+            self.dismiss()
+        }label: {
+            Image(systemName: "chevron.left")
+                .font(.title3)
+                .foregroundStyle(.black)
         }
     }
 }
