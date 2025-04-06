@@ -19,8 +19,7 @@ struct CircleImageCard: View {
                 .clipShape(Circle())
             
             Text(menuItem.name)
-                .font(.caption)
-                .fontWeight(.bold)
+                .font(.footnote)
         }
         .frame(width: 120, height: 160)
     }

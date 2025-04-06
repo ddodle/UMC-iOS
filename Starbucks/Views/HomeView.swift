@@ -54,13 +54,10 @@ struct HomeView : View {
             }
             .padding(.horizontal)
             
-            Image("eventBanner")
-                .resizable()
-                .padding(.horizontal, 20)
-            
-            Image("serviceSubscribe")
-                .resizable()
-                .padding(.horizontal, 20)
+            VStack{
+                Image("eventBanner")
+                Image("serviceSubscribe")
+            }
             
             VStack (alignment: .leading){
                 Text("What's new")
