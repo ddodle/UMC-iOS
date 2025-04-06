@@ -1,0 +1,121 @@
+//
+//  HomeView.swift
+//  Starbucks
+//
+//  Created by 김도연 on 4/6/25.
+//
+
+import SwiftUI
+
+struct HomeView : View {
+    @State private var progress: Float = 1 / 12.0
+    @StateObject var menuViewModel = MenuViewModel()
+    
+    var body: some View {
+        ScrollView{
+            VStack{
+                topBanner
+                    .padding(.horizontal)
+                mainBanner
+                
+            }
+            
+        }
+        .ignoresSafeArea(.all)
+    }
+    
+    var mainBanner: some View{
+        VStack{
+            Image("bear_ad")
+                .resizable()
+                .padding(.horizontal, 20)
+            
+            VStack (alignment: .leading){
+                Group{
+                    Text("\(menuViewModel.displayName)")
+                        .font(.title2)
+                        .foregroundStyle(.brown01)
+                    +
+                    Text("님을 위한 추천 메뉴")
+                        .font(.title2)
+                }
+                .padding()
+
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(menuViewModel.menuItems) { menuItem in
+                            CircleImageCard(menuItem: menuItem)
+                        }
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .padding(.horizontal)
+            
+            Image("eventBanner")
+                .resizable()
+                .padding(.horizontal, 20)
+            
+            Image("serviceSubscribe")
+                .resizable()
+                .padding(.horizontal, 20)
+            
+            
+        }
+        .padding()
+    }
+    
+    var topBanner: some View{
+        ZStack{
+            VStack {
+                Image("top_img")
+                
+                Spacer()
+            }
+            
+            VStack(alignment: .leading){
+                
+                Text("골든 미모사 그린 티와 함께\n행복한 새해의 축배를 들어요!")
+                    .font(.title2)
+                    .bold()
+                    .padding()
+                    .padding(.top, 100)
+                
+                HStack {
+                    VStack(alignment: .leading){
+                        Text("11 ★ until next Reward")
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundColor(.brown01)
+                        
+                        ProgressView(value: progress, total: 1)
+                            .tint(.brown01)
+                            .frame(height: 10)
+                    }
+                    
+                    Spacer()
+                    
+                    HStack{
+                        Text("1")
+                            .font(.largeTitle)
+                            .bold()
+                        Text("/")
+                            .font(.title)
+                        Text("12★")
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.brown01)
+                    }
+                }
+                .padding()
+
+            }
+            .padding()
+        }
+    }
+}
+
+#Preview {
+    HomeView()
+}
