@@ -12,6 +12,7 @@ struct HomeView : View {
     @StateObject var menuViewModel = MenuViewModel()
     @StateObject var whatsNewViewModel = WhatsNewViewModel()
     @StateObject var breadViewModel = BreadViewModel()
+    @StateObject var coffeeDetailViewModel = CoffeeDetailViewModel()
     
     var body: some View {
         NavigationStack{
@@ -48,7 +49,9 @@ struct HomeView : View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(menuViewModel.menuItems) { menuItem in
-                            CircleImageCard(menuItem: menuItem)
+                            NavigationLink(destination: CoffeeDetailView(coffeeDetail: coffeeDetailViewModel.coffeeDetail.first { $0.menuKorName == menuItem.name } ?? coffeeDetailViewModel.coffeeDetail[0])) {
+                                CircleImageCard(menuItem: menuItem)
+                            }
                         }
                     }
                 }
