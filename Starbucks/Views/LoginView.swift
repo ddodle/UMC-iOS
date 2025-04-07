@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject private var LoginViewModle = LoginViewModel()
+    @EnvironmentObject private var loginViewModel: LoginViewModel
     @State private var navigationToSignup = false
     @FocusState private var focusedField: Field?
     
@@ -70,6 +71,7 @@ struct LoginView: View {
             VStack{
                 TextField("아이디", text: $LoginViewModle.user.id)
                     .focused($focusedField, equals: .id)
+                    .autocapitalization(.none)
                 Divider()
                     .frame(height: 1)
                     .background(focusedField == .id ? Color.green00: Color.gray00)
@@ -78,13 +80,16 @@ struct LoginView: View {
             VStack{
                 SecureField("비밀번호", text: $LoginViewModle.user.password)
                     .focused($focusedField, equals: .password)
+                    .autocapitalization(.none)
                 Divider()
                     .frame(height: 1)
                     .background(focusedField == .password ? Color.green00: Color.gray00)
             }
             
             VStack {
-                Button(action: {}, label: {
+                Button(action: {
+                    LoginViewModle.login()
+                }, label: {
                   Text("로그인하기")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 })
@@ -92,6 +97,9 @@ struct LoginView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
                 .tint(.green00)
+                .navigationDestination(isPresented: $LoginViewModle.isAuthenticated){
+                    MainTabView()
+                }
                 
                 NavigationLink("회원가입", destination: SignupView())
                     .tint(.secondary)

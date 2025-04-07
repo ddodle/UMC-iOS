@@ -9,10 +9,11 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @StateObject private var loginViewModel = LoginViewModel()
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            Color.white
+            HomeView()
                 .tabItem {
                     VStack{
                         Image(selectedTab == 0 ? "homeSelected":"home")
@@ -58,6 +59,8 @@ struct MainTabView: View {
                 .tag(4)
         }
         .tint(.green02)
+        .navigationBarBackButtonHidden(true)
+        .environmentObject(loginViewModel)
     }
 }
 

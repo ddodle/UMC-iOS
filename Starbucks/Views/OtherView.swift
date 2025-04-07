@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OtherView: View {
     @StateObject private var otherViewModel = OtherViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
     
     var body: some View {
         ZStack{
@@ -29,6 +30,7 @@ struct OtherView: View {
                 }
             }
         }
+        .navigationTitle("Other View")
     }
     
     var Topbar: some View{
@@ -37,7 +39,9 @@ struct OtherView: View {
                 .font(.title)
                 .fontWeight(.bold)
             Spacer()
-            Button(action: {print("logout")}){
+            Button(action: {
+                loginViewModel.logout()
+            }){
                 Image("logout")
             }
         }
