@@ -52,7 +52,6 @@ struct HomeView : View {
                             NavigationLink(destination: CoffeeDetailView(coffeeDetail: coffeeDetailViewModel.coffeeDetail.first { $0.menuKorName == menuItem.name } ?? coffeeDetailViewModel.coffeeDetail[0])) {
                                 CircleImageCard(menuItem: menuItem)
                             }
-                            .tint(.black)
                         }
                     }
                 }

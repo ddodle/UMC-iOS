@@ -20,6 +20,7 @@ struct CircleImageCard: View {
             
             Text(menuItem.name)
                 .font(.footnote)
+                .foregroundStyle(.black02)
         }
         .frame(width: 120, height: 160)
     }

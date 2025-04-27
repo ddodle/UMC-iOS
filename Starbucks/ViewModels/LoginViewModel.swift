@@ -10,7 +10,7 @@ import SwiftUI
 
 class LoginViewModel: ObservableObject {
     @Published var user: User = User()
-    @Published var isAuthenticated: Bool = false
+    @AppStorage("isLogin") var isAuthenticated: Bool = false
     @Published var errorMessage: String? = nil
     
     @AppStorage("email") private var storedEmail: String = ""
