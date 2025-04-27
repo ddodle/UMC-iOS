@@ -18,7 +18,6 @@ struct StarbucksApp: App {
             }else{
                 LoginView()
             }
-            ContentView()
         }
     }
 }

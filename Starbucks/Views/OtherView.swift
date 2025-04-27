@@ -10,6 +10,7 @@ import SwiftUI
 struct OtherView: View {
     @StateObject private var otherViewModel = OtherViewModel()
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack{
@@ -41,6 +42,7 @@ struct OtherView: View {
             Spacer()
             Button(action: {
                 loginViewModel.logout()
+                dismiss()
             }){
                 Image("logout")
             }
