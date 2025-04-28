@@ -40,7 +40,7 @@ struct MainTabView: View {
                 }
                 .tag(2)
 
-            Color.white
+            ShopView()
                 .tabItem {
                     VStack{
                         Image(selectedTab == 3 ? "shopSelected":"shop")

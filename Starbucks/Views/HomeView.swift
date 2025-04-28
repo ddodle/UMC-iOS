@@ -40,9 +40,11 @@ struct HomeView : View {
                     Text("\(menuViewModel.displayName)")
                         .font(.title2)
                         .foregroundStyle(.brown01)
+                        .bold()
                     +
                     Text("님을 위한 추천 메뉴")
                         .font(.title2)
+                        .bold()
                 }
                 .padding()
 
@@ -68,6 +70,7 @@ struct HomeView : View {
                 Text("What's new")
                     .font(.title2)
                     .padding()
+                    .bold()
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
@@ -90,6 +93,7 @@ struct HomeView : View {
                 Text("하루가 달콤해지는 디저트")
                     .font(.title2)
                     .padding()
+                    .bold()
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
