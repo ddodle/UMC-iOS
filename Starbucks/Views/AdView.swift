@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AdView: View{
     @Environment(\.dismiss) private var dismiss
+    @Binding var showAd: Bool
     
     var body: some View{
         VStack{
@@ -53,5 +54,5 @@ struct AdView: View{
 }
 
 #Preview {
-    AdView()
+    AdView(showAd: .constant(true))
 }
