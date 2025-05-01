@@ -13,25 +13,26 @@ struct OtherView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ZStack{
-            Color(.white00)
-                .ignoresSafeArea()
-            
-            VStack{
-                Topbar
+        NavigationStack{
+            ZStack{
+                Color(.white00)
+                    .ignoresSafeArea()
                 
-                ScrollView{
-                    VStack(spacing: 24){
-                        Info
-                        Pay
-                        Divider()
-                        Service
+                VStack{
+                    Topbar
+                    
+                    ScrollView{
+                        VStack(spacing: 24){
+                            Info
+                            Pay
+                            Divider()
+                            Service
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
             }
         }
-        .navigationTitle("Other View")
     }
     
     var Topbar: some View{
@@ -63,9 +64,11 @@ struct OtherView: View {
             .multilineTextAlignment(.center)
             
             HStack{
-                IconButton(title: "별 히스토리", imageName: "star_history", action: {print("star_history")})
-                IconButton(title: "전자영수증", imageName: "receipt", action: {print("receipt")})
-                IconButton(title: "나만의 메뉴", imageName: "myRecipe", action: {print("myRecipe")})
+                IconButton(title: "별 히스토리", imageName: "star_history")
+                NavigationLink(destination: ElecReceiptView()) {
+                    IconButton(title: "전자영수증", imageName: "receipt")
+                }
+                IconButton(title: "나만의 메뉴", imageName: "myRecipe")
             }
         }
     }

@@ -11,6 +11,8 @@ struct LoginView: View {
     @StateObject private var LoginViewModle = LoginViewModel()
     @EnvironmentObject private var loginViewModel: LoginViewModel
     @State private var navigationToSignup = false
+    @State private var showAd: Bool = false
+    @State private var hasShownAd = false
     @FocusState private var focusedField: Field?
     
     enum Field{
@@ -99,6 +101,15 @@ struct LoginView: View {
                 .tint(.green00)
                 .navigationDestination(isPresented: $LoginViewModle.isAuthenticated){
                     MainTabView()
+                        .fullScreenCover(isPresented: $showAd) {
+                            AdView(showAd: $showAd)
+                        }
+                        .onAppear {
+                            if !hasShownAd {
+                                showAd = true
+                                hasShownAd = true
+                            }
+                        }
                 }
                 
                 NavigationLink("회원가입", destination: SignupView())

@@ -10,10 +10,9 @@ import SwiftUI
 struct IconButton: View {
     let title: String
     let imageName: String
-    let action: () -> Void
     
     var body: some View {
-        Button(action: action){
+        Group{
             VStack{
                 Image(imageName)
                     .resizable()
@@ -30,5 +29,5 @@ struct IconButton: View {
 }
 
 #Preview {
-    IconButton(title: "별 히스토리", imageName: "star_history", action: {print("star_history")})
+    IconButton(title: "별 히스토리", imageName: "star_history")
 }

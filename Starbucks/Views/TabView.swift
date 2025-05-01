@@ -10,7 +10,6 @@ import SwiftUI
 struct MainTabView: View {
     @State private var selectedTab = 0
     @StateObject private var loginViewModel = LoginViewModel()
-    @State private var showAd: Bool = false
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -62,12 +61,6 @@ struct MainTabView: View {
         .tint(.green02)
         .navigationBarBackButtonHidden(true)
         .environmentObject(loginViewModel)
-        .onAppear {
-            showAd = true
-        }
-        .fullScreenCover(isPresented: $showAd) {
-            AdView(showAd: $showAd)
-        }
     }
 }
 

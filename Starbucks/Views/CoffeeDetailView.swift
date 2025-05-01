@@ -63,8 +63,11 @@ struct CoffeeDetailView: View {
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backbutton)
-        .navigationBarItems(trailing: sharebutton)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {backbutton}
+            
+            ToolbarItem(placement: .navigationBarTrailing) {sharebutton}
+        }
         .padding(.bottom)
     }
     
