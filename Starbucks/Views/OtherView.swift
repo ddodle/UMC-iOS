@@ -33,6 +33,7 @@ struct OtherView: View {
                 }
             }
         }
+        .modelContainer(for: ReceiptsModel.self)
     }
     
     var Topbar: some View{
