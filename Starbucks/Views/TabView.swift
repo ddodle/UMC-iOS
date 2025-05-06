@@ -31,7 +31,7 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            Color.white
+            OrderView()
                 .tabItem {
                     VStack{
                         Image(selectedTab == 2 ? "orderSelected":"order")

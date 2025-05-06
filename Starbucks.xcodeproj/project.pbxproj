@@ -21,6 +21,11 @@
 			path = Starbucks;
 			sourceTree = "<group>";
 		};
+		0BD0E6EB2DC8E74100CC67BF /* Utilities */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +45,7 @@
 				0B9819AF2D8D6C7600F8CD3F /* Colors.xcassets */,
 				0B6C0BB22D8865CF00329012 /* Starbucks */,
 				0B6C0BB12D8865CF00329012 /* Products */,
+				0BD0E6EB2DC8E74100CC67BF /* Utilities */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +74,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				0B6C0BB22D8865CF00329012 /* Starbucks */,
+				0BD0E6EB2DC8E74100CC67BF /* Utilities */,
 			);
 			name = Starbucks;
 			packageProductDependencies = (
