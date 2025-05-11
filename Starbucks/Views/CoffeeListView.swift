@@ -21,7 +21,6 @@ struct CoffeeListView: View {
             
             VStack{
                 Text(coffeeDetail.menuKorName)
-                    .font(.title3)
                     .foregroundStyle(.black02)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 

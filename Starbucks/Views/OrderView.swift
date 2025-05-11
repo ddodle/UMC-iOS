@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct OrderView: View {
     
@@ -18,10 +19,29 @@ struct OrderView: View {
             }
         }
     }
-
+    
+    @StateObject private var vm = StoreViewModel()
+    @State private var cameraPosition: MapCameraPosition =
+        .userLocation(
+            followsHeading: false,
+            fallback: .region(
+                MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(
+                        latitude: 37.484768,
+                        longitude: 126.930467
+                    ),
+                    span: MKCoordinateSpan(
+                        latitudeDelta: 0.01,
+                        longitudeDelta: 0.01
+                    )
+                )
+            )
+        )
+    @StateObject private var locMgr = LocationManager()
     @State private var selected = MenuTab.all
     @State private var selectedTab1 = 0
     @State private var selectedMenu = 0
+    @State private var selectedMap : Bool = false
     @State private var showSheet: Bool = false
     private let menuCategories = ["음료", "푸드", "상품"]
     @StateObject var coffeeDetailViewModel = CoffeeDetailViewModel()
@@ -154,58 +174,7 @@ struct OrderView: View {
             }
             .padding(.horizontal)
             .sheet(isPresented: $showSheet, content: {
-                VStack{
-                    Text("매장 선택")
-                        .frame(maxWidth: .infinity)
-                        .font(.callout)
-                        .overlay(alignment: .trailing) {
-                            Button{
-                                
-                            }label:{
-                                Image("map")
-                                  .padding(.leading, 4)
-                            }
-                        }
-                        .padding(.top, 32)
-                        .padding(.horizontal)
-                    
-                    ZStack{
-                        Rectangle()
-                            .frame(height: 28)
-                            .foregroundStyle(.gray07)
-                        
-                        Text("검색")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                            .foregroundStyle(.gray)
-                    }
-                    .padding()
-                    
-                    HStack(spacing : 16){
-                        ForEach(0..<2) { idx in
-                            Button {
-                                selectedTab1 = idx
-                            } label: {
-                                VStack {
-                                    Text(idx == 0 ? "가까운 매장" : "자주가는 매장")
-                                        .font(.headline)
-                                        .foregroundColor(selectedTab1 == idx ? .black : .gray)
-                                }
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-
-                    Divider()
-                    
-                    ScrollView{
-                        
-                    }
-                }
-                .presentationDragIndicator(.visible)
+                sheetView
             })
         }
     }
@@ -219,6 +188,157 @@ struct OrderView: View {
             }
         }
     }
+    
+    var sheetView: some View {
+        VStack{
+            Text("매장 선택")
+                .frame(maxWidth: .infinity)
+                .font(.callout)
+                .overlay(alignment: .trailing) {
+                    Button{
+                        self.selectedMap.toggle()
+                    }label:{
+                        Image("map")
+                          .padding(.leading, 4)
+                    }
+                }
+                .padding(.top, 32)
+                .padding(.horizontal)
+            
+            ZStack{
+                Rectangle()
+                    .frame(height: 28)
+                    .foregroundStyle(.gray07)
+                
+                Text("검색")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .foregroundStyle(.gray)
+            }
+            .padding()
+            
+            HStack(spacing : 16){
+                ForEach(0..<2) { idx in
+                    Button {
+                        selectedTab1 = idx
+                    } label: {
+                        VStack {
+                            Text(idx == 0 ? "가까운 매장" : "자주가는 매장")
+                                .font(.headline)
+                                .foregroundColor(selectedTab1 == idx ? .black : .gray)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                
+                Spacer()
+            }
+            .padding(.horizontal)
+
+            Divider()
+            
+            if selectedMap {
+                ZStack {
+                    Map(position: $cameraPosition) {
+                        ForEach(nearbyStores) { store in
+                            Marker(store.name, coordinate: store.coordinate)
+                                .tint(.green)
+                        }
+                        UserAnnotation()
+                    }
+                    .edgesIgnoringSafeArea(.bottom)
+                    
+                    VStack{
+                        Button(action: {
+                            
+                        }, label: {
+                          Text("이 지역 검색")
+                                .font(.caption)
+                                .foregroundStyle(.black)
+                        })
+                        .frame(width: 88,height: 36)
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.capsule)
+                        .tint(.white)
+                        .padding(.top, 20)
+                        
+                        Spacer()
+                    }
+                }
+            } else {
+                List(sortedStores) { store in
+                    HStack {
+                        Image("store_info")
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(store.name)
+                                .font(.subheadline).bold()
+                            Text(store.address)
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                            
+                            switch store.category {
+                            case "DT 매장":
+                                Image("DTStore")
+                            case "리저브 매장":
+                                Image("ReserveStore")
+                            default:
+                                EmptyView()
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        if let userLoc = locMgr.lastLocation {
+                            let storeLoc = CLLocation(
+                                latitude: store.coordinate.latitude,
+                                longitude: store.coordinate.longitude
+                            )
+                            let distKm = userLoc.distance(from: storeLoc) / 1000
+                            Text(String(format: "%.1fkm", distKm))
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        } else {
+                            Text("---")
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+                .listStyle(PlainListStyle())
+            }
+            
+        }
+        .presentationDragIndicator(.visible)
+    }
+    
+    private var sortedStores: [Store] {
+        guard let userLoc = locMgr.lastLocation else {
+            return vm.stores
+        }
+        return vm.stores.sorted { a, b in
+            let la = CLLocation(latitude: a.coordinate.latitude,
+                                longitude: a.coordinate.longitude)
+            let lb = CLLocation(latitude: b.coordinate.latitude,
+                                longitude: b.coordinate.longitude)
+            return userLoc.distance(from: la) < userLoc.distance(from: lb)
+        }
+    }
+    
+    private var nearbyStores: [Store] {
+        guard let userLoc = locMgr.lastLocation else {
+            return []
+        }
+        return vm.stores.filter { store in
+            let storeLoc = CLLocation(
+                latitude: store.coordinate.latitude,
+                longitude: store.coordinate.longitude
+            )
+            return userLoc.distance(from: storeLoc) <= 10_000
+        }
+    }
+
 }
 
 #Preview {

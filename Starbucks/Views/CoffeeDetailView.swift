@@ -15,7 +15,8 @@ struct CoffeeDetailView: View {
         VStack(spacing: 20){
             ZStack{
                 Image(coffeeDetail.menuImage)
-                    .frame(alignment: .top)
+                    .resizable()
+                    .frame(maxWidth: 440, maxHeight: 355, alignment: .top)
             }
             .ignoresSafeArea()
             
