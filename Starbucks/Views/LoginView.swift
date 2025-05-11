@@ -115,7 +115,9 @@ struct LoginView: View {
 
     var thirdPartyLoginField: some View {
         VStack(spacing: 8) {
-            Button(action: {}, label: {
+            Button(action: {
+                kakaoLogin()
+            }, label: {
               Text("카카오로 로그인")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .overlay(alignment: .leading) {
