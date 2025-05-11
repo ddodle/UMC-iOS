@@ -69,19 +69,8 @@ struct SignupView: View{
                 .frame(maxHeight : 428)
             
             Button(action: {
-                if  signupViewModel.signup.nickname.count > 0 &&
-                    signupViewModel.signup.email.count > 0 &&
-                    signupViewModel.signup.password.count > 0 {
-                    
-                    
-                    storedNickname = signupViewModel.signup.nickname
-                    storedEmail = signupViewModel.signup.email
-                    storedPassword = signupViewModel.signup.password
-                    
-                    dismiss()
-                }else{
-                    
-                }
+                signupViewModel.signupAndSave()
+                dismiss()
             }, label: {
               Text("회원가입하기")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

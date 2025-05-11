@@ -11,6 +11,7 @@ struct HomeView : View {
     @State private var progress: Float = 1 / 12.0
     @StateObject var menuViewModel = MenuViewModel()
     @StateObject var whatsNewViewModel = WhatsNewViewModel()
+    @StateObject var otherViewModel = OtherViewModel()
     @StateObject var breadViewModel = BreadViewModel()
     @StateObject var coffeeDetailViewModel = CoffeeDetailViewModel()
     
@@ -37,7 +38,7 @@ struct HomeView : View {
             
             VStack (alignment: .leading){
                 Group{
-                    Text("\(menuViewModel.displayName)")
+                    Text(otherViewModel.nickname)
                         .font(.title2)
                         .foregroundStyle(.brown01)
                         .bold()

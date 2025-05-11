@@ -9,16 +9,12 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject private var LoginViewModle = LoginViewModel()
-    @EnvironmentObject private var loginViewModel: LoginViewModel
     @State private var navigationToSignup = false
     @State private var showAd: Bool = false
     @State private var hasShownAd = false
     @FocusState private var focusedField: Field?
     
-    enum Field{
-        case id
-        case password
-    }
+    enum Field { case id, password }
     
     var body: some View {
         NavigationStack{
@@ -75,7 +71,6 @@ struct LoginView: View {
                     .focused($focusedField, equals: .id)
                     .autocapitalization(.none)
                 Divider()
-                    .frame(height: 1)
                     .background(focusedField == .id ? Color.green00: Color.gray00)
             }
             
@@ -84,7 +79,6 @@ struct LoginView: View {
                     .focused($focusedField, equals: .password)
                     .autocapitalization(.none)
                 Divider()
-                    .frame(height: 1)
                     .background(focusedField == .password ? Color.green00: Color.gray00)
             }
             

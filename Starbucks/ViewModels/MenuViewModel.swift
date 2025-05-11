@@ -8,7 +8,6 @@
 import SwiftUI
 
 class MenuViewModel: ObservableObject {
-    @Published var userName: String
     
     @Published var menuItems: [MenuItem] = [
         MenuItem(name: "에스프레소 콘 파나", imageName: "espresso_conpana"),
@@ -18,12 +17,4 @@ class MenuViewModel: ObservableObject {
         MenuItem(name: "아이스 카라멜 마키아또", imageName: "iced_caramel_macchiato"),
         MenuItem(name: "카라멜 마키아또", imageName: "caramel_macchiato")
     ]
-    
-    init() {
-        self.userName = UserDefaults.standard.string(forKey: "nickname") ?? "(설정 닉네임)"
-    }
-    
-    var displayName: String {
-        return userName
-    }
 }
