@@ -103,7 +103,9 @@ struct OtherView: View {
                 ], spacing: 24) {
                 ItemButtonView(title: "스토어 케어", imageName: "store_care", action: {print("store_care")})
                 ItemButtonView(title: "고객의 소리", imageName: "customer", action: {print("customer")})
-                ItemButtonView(title: "매장 정보", imageName: "store_info", action: {print("store_info")})
+                NavigationLink(destination: NavigationMapView()){
+                    ItemButtonView(title: "매장 정보", imageName: "store_info", action: {print("store_info")})
+                }
                 ItemButtonView(title: "반납기 정보", imageName: "return_info", action: {print("return_info")})
                 ItemButtonView(title: "마이 스타벅스 리뷰", imageName: "my_review", action: {print("my_review")})
             }

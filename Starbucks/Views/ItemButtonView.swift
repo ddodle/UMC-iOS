@@ -13,7 +13,7 @@ struct ItemButtonView: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: action){
+        Group{
             HStack {
                 Image(imageName)
                     .resizable()
